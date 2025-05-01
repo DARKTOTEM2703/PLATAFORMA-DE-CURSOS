@@ -35,7 +35,7 @@
     </div>
 
     <!-- Sección de información -->
-    <div class="container my-5 pd-5">
+    <div class="container my-5 p-0">
         <div class="row border">
             <div class="col-md-6 p-5">
                 <div class="img-container">
