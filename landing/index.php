@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="col-md-6 p-5">
-                <div class="row border p-0">
+                <div class="row border p-5">
                     <h2 class="text-center mb-4">Informacion de la escuela de capacitacion</h2>
                     <p class="text-center">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt similique animi, corrupti
