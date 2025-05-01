@@ -16,3 +16,40 @@
   background-color: #5e0c37;
   color: white;
 }
+/* Estilos para las formas decorativas */
+.img-container {
+  position: relative;
+  overflow: visible;
+  border: 15px solid #ffa500;
+  max-width: 100%;
+  margin-bottom: 50px;
+}
+
+.img-container img {
+  display: block;
+  width: 100%;
+}
+
+/* Triángulo morado en la parte inferior derecha */
+.purple-triangle {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  bottom: -50px;
+  right: 100px;
+  background-color: #7b1048;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  z-index: 2;
+  transform: rotate(180deg);
+}
+
+/* Forma rectangular gris */
+.gray-shape {
+  position: absolute;
+  width: 150px;
+  height: 40px;
+  bottom: -60px;
+  right: 70px;
+  background-color: #aaaaaa;
+  z-index: 1;
+}

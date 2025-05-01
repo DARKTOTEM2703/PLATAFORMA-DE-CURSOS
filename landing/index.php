@@ -41,6 +41,8 @@
                 <div class="img-container">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfv_DbdqnbRqoT3cAHzuaT3NkMmCPASpbRCA&s"
                         alt="Clase de capacitación" class="img-fluid w-100">
+                    <div class="purple-triangle"></div>
+                    <div class="gray-shape"></div>
                 </div>
             </div>
             <div class="col-md-6 p-5">
