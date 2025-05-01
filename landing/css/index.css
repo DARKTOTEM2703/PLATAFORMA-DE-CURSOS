@@ -1,3 +1,18 @@
 .bg-primary {
   background-color: #1a2d5d !important;
 }
+
+.img-fluid {
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.btn-inscribete {
+  background-color: #7b1048;
+  color: white;
+}
+
+.btn-inscribete:hover {
+  background-color: #5e0c37;
+  color: white;
+}
