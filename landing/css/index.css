@@ -28,32 +28,30 @@
 }
 
 /* Recorte de la imagen en forma de V */
+.img-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px; /* ajusta según tu diseño */
+  margin-bottom: 100px;
+}
+
 .img-container img {
   display: block;
   width: 100%;
-  height: auto;
-  position: relative;
-  z-index: 1;
   clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
 }
 
-/* Marco naranja en forma de V */
 .img-container::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  pointer-events: none;
+  inset: 0;
   border: 8px solid #ffa500;
   border-bottom: none;
   border-left: none;
-  width: 100%;
-  height: 100%;
   box-sizing: border-box;
+  pointer-events: none;
   clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
+  z-index: 2;
 }
 
 /* Triángulo morado */
@@ -77,4 +75,40 @@
   bottom: -100px;
   background: #aaaaaa;
   z-index: 2;
+}
+
+.footer-hero {
+  width: 100%;
+  min-height: 120px;
+  background: url("https://blog.adecco.com.mx/wp-content/uploads/2019/05/cursos-adecco-capacitacion-personal-1-1.png")
+    center center/cover no-repeat;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50%;
+  margin-right: -50%;
+  overflow: hidden;
+  /* Elimina display:flex aquí */
+}
+
+.footer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(82, 97, 130, 0.9); /* Más opaco */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.footer-text {
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 1px;
+  z-index: 2;
+  position: relative;
 }
