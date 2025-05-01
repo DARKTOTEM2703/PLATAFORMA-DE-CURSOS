@@ -20,36 +20,61 @@
 .img-container {
   position: relative;
   overflow: visible;
-  border: 15px solid #ffa500;
+  border: none;
   max-width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: 120px;
+  background: transparent;
+  z-index: 0;
 }
 
+/* Recorte de la imagen en forma de V */
 .img-container img {
   display: block;
   width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 1;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
 }
 
-/* Triángulo morado en la parte inferior derecha */
+/* Marco naranja en forma de V */
+.img-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  pointer-events: none;
+  border: 8px solid #ffa500;
+  border-bottom: none;
+  border-left: none;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
+}
+
+/* Triángulo morado */
 .purple-triangle {
   position: absolute;
-  width: 100px;
-  height: 100px;
-  bottom: -50px;
-  right: 100px;
-  background-color: #7b1048;
+  width: 90px;
+  height: 75px;
+  right: 24px;
+  bottom: -65px;
+  background: #7b1048;
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  z-index: 2;
-  transform: rotate(180deg);
+  z-index: 3;
 }
 
-/* Forma rectangular gris */
+/* Rectángulo gris */
 .gray-shape {
   position: absolute;
-  width: 150px;
-  height: 40px;
-  bottom: -60px;
-  right: 70px;
-  background-color: #aaaaaa;
-  z-index: 1;
+  width: 120px;
+  height: 28px;
+  right: 10px;
+  bottom: -100px;
+  background: #aaaaaa;
+  z-index: 2;
 }
