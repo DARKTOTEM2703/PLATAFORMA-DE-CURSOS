@@ -1,0 +1,45 @@
+.bg-primary {
+  background-color: #1a2d5d !important;
+}
+body {
+  background: #ededed;
+  min-height: 100vh;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  min-height: 80vh; /* Ocupa toda la altura de la página */
+}
+
+.login-card {
+  width: 100%; /* Por defecto ocupa todo el ancho disponible */
+  max-width: 550px; /* Limita el ancho máximo */
+  margin: 20px; /* Agrega margen para evitar que toque los bordes en pantallas pequeñas */
+  box-shadow: 0 8px 32px 0 rgba(60, 60, 60, 0.08);
+}
+
+.btn-vino {
+  background: #7b1048;
+  color: #fff;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-vino:hover {
+    background: #5e0c37;
+    color: #fff;
+  }
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 576px) {
+  .login-card {
+    padding: 20px; /* Reduce el padding interno */
+    max-width: 90%; /* Ocupa el 90% del ancho de la pantalla */
+  }
+
+  h6 {
+    font-size: 1rem; /* Ajusta el tamaño del texto del título */
+  }
+}
