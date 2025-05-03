@@ -1,0 +1,88 @@
+/* General Styles */
+body {
+  background: #ededed;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+header {
+  background-color: #1a2d5d;
+  font-size: 1.5rem;
+}
+
+/* Sidebar */
+.sidebar {
+  height: auto; /* Ajusta la altura según el contenido */
+  padding: 0;
+  border-right: 1px solid #ddd; /* Línea divisoria */
+  margin-right: 300px; /* Agrega separación con el contenido principal */
+  bordes-radius: 8px;
+}
+
+.sidebar .nav-link {
+  font-weight: bold;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ffffff33; /* Línea divisoria entre enlaces */
+  text-decoration: none;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #39496a;
+  color: #fff;
+}
+
+/* Sidebar Button */
+.sidebar .btn-danger {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Main Content */
+.main-content {
+  background: #fff;
+  border: 1px solid #ddd; /* Borde alrededor del contenido principal */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+section {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+.col-md-9 {
+  display: inline-block;
+  justify-content: center;
+  width: 50%;
+  background-color: white;
+}
+.img-fluid {
+  margin-bottom: 20px;
+}
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .container-fluid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar {
+    margin-right: 0; /* Elimina el margen en pantallas pequeñas */
+    border-right: none; /* Elimina la línea divisoria */
+    border-bottom: 1px solid #ddd; /* Agrega una línea divisoria inferior */
+    width: 100%; /* Ocupa todo el ancho */
+  }
+
+  .main-content {
+    margin-top: 20px; /* Espaciado superior para separar del sidebar */
+    width: 100%; /* Ocupa todo el ancho */
+  }
+
+  .img-fluid {
+    width: 100%; /* Imagen ajustada al ancho del contenedor */
+    height: auto; /* Mantiene la proporción */
+  }
+}
