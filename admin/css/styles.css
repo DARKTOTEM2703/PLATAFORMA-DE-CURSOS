@@ -1,6 +1,67 @@
 .bg-primary {
   background-color: #1a2d5d !important;
 }
+
+/* General Styles */
+body {
+  background: #ededed;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Flexbox para alinear el sidebar y el contenido principal */
+.container-fluid {
+  display: flex;
+  flex-direction: row; /* Alinea los elementos horizontalmente */
+  height: 100%; /* Ocupa toda la altura */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 20%; /* Ajusta el ancho del sidebar */
+  height: 100%; /* Ocupa toda la altura */
+  padding: 0;
+  border-right: 1px solid #ddd; /* Línea divisoria */
+  background-color: #1a2d5d;
+}
+
+.sidebar .nav-link {
+  font-weight: bold;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ffffff33; /* Línea divisoria entre enlaces */
+  text-decoration: none;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #39496a;
+  color: #fff;
+}
+
+/* Sidebar Button */
+.sidebar .btn-danger {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1; /* Ocupa el espacio restante */
+  background: #fff;
+  border: 1px solid #ddd; /* Borde alrededor del contenido principal */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px; /* Espaciado alrededor del contenido */
+}
+
+/* Imagen */
+.img-fluid {
+  margin-bottom: 20px;
+}
+
 body {
   background: #ededed;
   min-height: 100vh;
@@ -41,5 +102,29 @@ body {
 
   h6 {
     font-size: 1rem; /* Ajusta el tamaño del texto del título */
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .container-fluid {
+    flex-direction: column; /* Cambia a diseño vertical en pantallas pequeñas */
+  }
+
+  .sidebar {
+    width: 100%; /* Ocupa todo el ancho */
+    height: auto; /* Ajusta la altura automáticamente */
+    border-right: none; /* Elimina la línea divisoria */
+    border-bottom: 1px solid #ddd; /* Línea divisoria inferior */
+  }
+
+  .main-content {
+    margin-top: 20px; /* Espaciado superior para separar del sidebar */
+    width: 100%; /* Ocupa todo el ancho */
+  }
+
+  .img-fluid {
+    width: 100%; /* Imagen ajustada al ancho del contenedor */
+    height: auto; /* Mantiene la proporción */
   }
 }

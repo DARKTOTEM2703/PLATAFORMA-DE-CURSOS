@@ -6,34 +6,37 @@ body {
 }
 
 /* Header */
-header {
-  background-color: #1a2d5d;
+.bg-primary {
+  background-color: #1a2d5d !important;
   font-size: 1.5rem;
 }
 
 /* Sidebar */
-.sidebar {
-  height: auto; /* Ajusta la altura según el contenido */
-  padding: 0;
+.col-md-3 {
+  margin-left: 20px; /* Espacio entre el header y el sidebar */
+  margin-right: 200px; /* Espacio entre el sidebar y el contenido principal */
+  padding: 30px 30px; /* Espacio interno */
   border-right: 1px solid #ddd; /* Línea divisoria */
-  margin-right: 300px; /* Agrega separación con el contenido principal */
-  bordes-radius: 8px;
+  background-color: #1a2d5d; /* Color de fondo */
+  height: 100%; /* Ocupa toda la altura */
+  border-radius: 15px; /* Bordes redondeados */
+  overflow: hidden; /* Asegura que el contenido no se salga de los bordes redondeados */
 }
 
-.sidebar .nav-link {
+.col-md-3 .nav-link {
   font-weight: bold;
   padding: 10px 15px;
   border-bottom: 1px solid #ffffff33; /* Línea divisoria entre enlaces */
   text-decoration: none;
 }
 
-.sidebar .nav-link:hover {
+.col-md-3 .nav-link:hover {
   background-color: #39496a;
   color: #fff;
 }
 
 /* Sidebar Button */
-.sidebar .btn-danger {
+.col-md-3 .btn-danger {
   font-weight: bold;
   font-size: 1rem;
 }

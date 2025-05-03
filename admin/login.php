@@ -1,3 +1,10 @@
+<?php
+require_once 'elements/cookie.php'; // Configuración de cookies y sesiones
+require_once 'elements/token.php'; // Generar el token CSRF
+require_once 'elements/process_login.php'; // Procesar el login
+require_once 'elements/redirectdash.php'; // Redirigir si ya está autenticado
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -16,9 +23,13 @@
     <div class="login-container">
         <div class="login-card bg-white rounded shadow-sm p-4 mt-5 border border-3">
             <h6 class="text-center fw-bold mb-3">Acceso Panel Administrativo</h6>
-            <form>
-                <input type="text" class="form-control mb-2" placeholder="Usuario">
-                <input type="password" class="form-control mb-3" placeholder="Contraseña">
+            <?php if (isset($error)): ?>
+                <div class="alert alert-danger text-center"><?php echo htmlspecialchars($error); ?></div>
+            <?php endif; ?>
+            <form method="POST" action="login.php">
+                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+                <input type="text" name="usuario" class="form-control mb-2" placeholder="Usuario" required>
+                <input type="password" name="password" class="form-control mb-3" placeholder="Contraseña" required>
                 <button type="submit" class="btn btn-vino w-100">Login</button>
             </form>
         </div>
