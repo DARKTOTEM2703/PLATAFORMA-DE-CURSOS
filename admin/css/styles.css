@@ -128,3 +128,9 @@ body {
     height: auto; /* Mantiene la proporción */
   }
 }
+
+#cronometro {
+  font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+  color: #6c757d; /* Color gris tenue */
+  margin-top: 10px;
+}

@@ -14,6 +14,8 @@ require_once 'db.php';
 // Requiere el archivo para registrar eventos en un log
 require_once 'log.php';
 
+// Tiempo de espera en segundos (por ejemplo, 300 segundos = 5 minutos)
+$tiempo_espera = 300;
 
 // Verifica si la solicitud es de tipo POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -43,10 +45,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Verifica si el número de intentos fallidos supera el límite permitido
-    if ($_SESSION['intentos'] >= 5) { // Cambiar el límite a 5
-        $error = 'Demasiados intentos fallidos. Intenta nuevamente más tarde.';
-        registrarEvento("Bloqueo por demasiados intentos fallidos para el usuario: $usuario");
-        return;
+    if ($_SESSION['intentos'] >= 5) {
+        // Si no existe un tiempo de bloqueo, lo establece
+        if (!isset($_SESSION['bloqueo_tiempo'])) {
+            $_SESSION['bloqueo_tiempo'] = time(); // Guarda el tiempo actual
+        }
+
+        // Calcula el tiempo restante para desbloquear
+        $tiempo_restante = time() - $_SESSION['bloqueo_tiempo'];
+
+        if ($tiempo_restante < $tiempo_espera) {
+            $error = 'Demasiados intentos fallidos. Intenta nuevamente en ' . (int)(($tiempo_espera - $tiempo_restante) / 60) . ' minutos.';
+            $tiempo_restante_segundos = $tiempo_espera - $tiempo_restante; // Tiempo restante en segundos
+            registrarEvento("Usuario bloqueado. Tiempo restante: " . $tiempo_restante_segundos . " segundos para el usuario: $usuario");
+            return;
+        } else {
+            // Si el tiempo de espera ha pasado, reinicia los intentos y elimina el bloqueo
+            $_SESSION['intentos'] = 0;
+            unset($_SESSION['bloqueo_tiempo']);
+        }
     }
 
     // Prepara una consulta para buscar el usuario en la base de datos
