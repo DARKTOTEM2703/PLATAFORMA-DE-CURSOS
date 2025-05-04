@@ -1,0 +1,115 @@
+/* General Styles */
+body {
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+.bg-primary {
+  background-color: #1a2d5d !important;
+  font-size: 1.5rem;
+}
+
+/* Sidebar */
+.col-md-3 {
+  margin-left: 20px; /* Espacio entre el header y el sidebar */
+  padding: 30px 30px; /* Espacio interno */
+  border-right: 1px solid #ddd; /* Línea divisoria */
+  background-color: #1a2d5d; /* Color de fondo */
+  height: 100%; /* Ocupa toda la altura */
+  border-radius: 15px; /* Bordes redondeados */
+  overflow: hidden; /* Asegura que el contenido no se salga de los bordes redondeados */
+}
+
+.col-md-3 .nav-link {
+  font-weight: bold;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ffffff33; /* Línea divisoria entre enlaces */
+  text-decoration: none;
+}
+
+.col-md-3 .nav-link:hover {
+  background-color: #39496a;
+  color: #fff;
+}
+
+/* Sidebar Button */
+.col-md-3 .btn-danger {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Main Content */
+.main-content {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+/* Título */
+.tittle {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4a4a4a;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.col-md-9 {
+  display: inline-block;
+  justify-content: center;
+  width: 50%;
+  background-color: white;
+}
+
+.img-fluid {
+  margin-bottom: 20px;
+}
+
+/* Estilo para el título y la línea divisoria */
+.custom-divider {
+  border-top: 2px solid #800020;
+  width: 50%;
+  margin: 0 auto;
+}
+/* Tabla */
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.table th,
+.table td {
+  border: 1px solid #800020;
+  padding: 10px;
+  text-align: center;
+}
+
+.table th {
+  background-color: #800020;
+  color: #ffffff;
+}
+
+.table td {
+  background-color: #f8f9fa;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
