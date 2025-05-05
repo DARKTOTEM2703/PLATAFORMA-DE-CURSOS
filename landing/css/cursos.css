@@ -1,0 +1,66 @@
+.bg-primary {
+  background-color: #1a2d5d !important;
+}
+
+.img-fluid {
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.btn-inscribete {
+  background-color: #7b1048;
+  color: white;
+}
+
+.btn-inscribete:hover {
+  background-color: #5e0c37;
+  color: white;
+}
+
+.img-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 8px solid #ffa500;
+  border-bottom: none;
+  border-left: none;
+  box-sizing: border-box;
+  pointer-events: none;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
+  z-index: 2;
+}
+
+.footer-hero {
+  width: 100%;
+  min-height: 120px;
+  background: url("https://blog.adecco.com.mx/wp-content/uploads/2019/05/cursos-adecco-capacitacion-personal-1-1.png")
+    center center/cover no-repeat;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50%;
+  margin-right: -50%;
+  overflow: hidden;
+}
+
+.footer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(82, 97, 130, 0.9); /* Más opaco */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.footer-text {
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 1px;
+  z-index: 2;
+  position: relative;
+}
