@@ -6,10 +6,22 @@
   max-width: 100%;
   object-fit: cover;
 }
-
-.btn-inscribete {
-  background-color: #7b1048;
+.table-red {
+  background-color: #800020;
   color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+/* Botón de inscripción */
+.btn-inscribete {
+  background-color: #800020;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-transform: uppercase;
 }
 
 .btn-inscribete:hover {
@@ -63,4 +75,49 @@
   letter-spacing: 1px;
   z-index: 2;
   position: relative;
+}
+
+/* Estilo para la tabla */
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.table th {
+  background-color: #800020;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
+.table td {
+  background-color: #f8f9fa;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+/* Responsividad */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* Suaviza el desplazamiento en dispositivos móviles */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .table th,
+  .table td {
+    font-size: 12px; /* Reduce el tamaño de la fuente */
+    padding: 8px; /* Reduce el relleno */
+  }
+
+  .table th {
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  }
+
+  .table td {
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  }
 }

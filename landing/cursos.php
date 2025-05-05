@@ -20,35 +20,24 @@
 
     <div class="container my-5">
         <h2 class="text-center mb-4">LISTA DE CURSOS</h2>
-        <table class="table table-bordered text-center">
-            <thead class="table-dark">
-                <tr>
-                    <th>Nombre del Curso</th>
-                    <th>Nombre del Docente</th>
-                    <th># de Horas</th>
-                    <th>Horario del curso</th>
-                    <th>Días del curso</th>
-                    <th>Objetivo del curso</th>
-                    <th>Inscripción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $stmt = $pdo->query('SELECT * FROM cursos');
-                while ($curso = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    echo "<tr>
-                        <td>{$curso['nombre']}</td>
-                        <td>{$curso['docente']}</td>
-                        <td>{$curso['horas']} hrs.</td>
-                        <td>{$curso['horario']}</td>
-                        <td>{$curso['dias']}</td>
-                        <td>{$curso['objetivo']}</td>
-                        <td><a href='#' class='btn btn-dark'>Inscríbete Ahora</a></td>
-                    </tr>";
-                }
-                ?>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center">
+                <thead class="table-red">
+                    <tr>
+                        <th>Nombre del Curso</th>
+                        <th>Nombre del Docente</th>
+                        <th>Numeros de Horas</th>
+                        <th>Horario del curso</th>
+                        <th>Días del curso</th>
+                        <th>Objetivo del curso</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="courses-table">
+                    <!-- Los datos se cargarán dinámicamente aquí -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <?php include 'components/footer.php'; // Footer común 
@@ -56,6 +45,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../admin/js/vercursos.js"></script>
 </body>
 
 </html>
