@@ -23,37 +23,39 @@ require_once 'elements/db.php';
                 <hr class="custom-divider mb-4">
                 <a href="cursos.php" class="btn btn-dark btn-regresar">
                     << REGRESAR</a>
-                        <table class="table table-bordered text-center">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Nombre del curso</th>
-                                    <th>Nombre del Docente</th>
-                                    <th># Horas</th>
-                                    <th>Horario del curso</th>
-                                    <th>Días del curso</th>
-                                    <th>Objetivo del curso</th>
-                                    <th>Eliminar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $stmt = $pdo->query('SELECT * FROM cursos');
-                                while ($curso = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                    echo "<tr>
-                                <td>{$curso['id']}</td>
-                                <td>{$curso['nombre']}</td>
-                                <td>{$curso['docente']}</td>
-                                <td>{$curso['horas']}</td>
-                                <td>{$curso['horario']}</td>
-                                <td>{$curso['dias']}</td>
-                                <td>{$curso['objetivo']}</td>
-                                <td><a href='eliminar_curso.php?id={$curso['id']}' class='btn btn-danger btn-sm'>Eliminar</a></td>
-                            </tr>";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-bordered text-center">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nombre del curso</th>
+                                        <th>Nombre del Docente</th>
+                                        <th># Horas</th>
+                                        <th>Horario del curso</th>
+                                        <th>Días del curso</th>
+                                        <th>Objetivo del curso</th>
+                                        <th>Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $stmt = $pdo->query('SELECT * FROM cursos');
+                                    while ($curso = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                        echo "<tr>
+                                    <td>{$curso['id']}</td>
+                                    <td>{$curso['nombre']}</td>
+                                    <td>{$curso['docente']}</td>
+                                    <td>{$curso['horas']}</td>
+                                    <td>{$curso['horario']}</td>
+                                    <td>{$curso['dias']}</td>
+                                    <td>{$curso['objetivo']}</td>
+                                    <td><a href='eliminar_curso.php?id={$curso['id']}' class='btn btn-danger btn-sm'>Eliminar</a></td>
+                                </tr>";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
             </main>
         </div>
     </div>
