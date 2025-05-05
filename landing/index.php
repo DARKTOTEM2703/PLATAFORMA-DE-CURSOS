@@ -36,7 +36,7 @@
                         exercitationem impedit maxime, accusantium totam!
                     </p>
                     <div class="text-center mt-4">
-                        <a href="#" class="btn btn-inscribete px-4 py-2">Inscríbete Ahora</a>
+                        <a href="inscripcion.php" class="btn btn-inscribete px-4 py-2">Inscríbete Ahora</a>
                     </div>
                 </div>
             </div>

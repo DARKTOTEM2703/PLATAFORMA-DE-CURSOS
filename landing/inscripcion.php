@@ -31,13 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->isSMTP();
         $mail->Host = $_ENV['SMTP_HOST'];
         $mail->SMTPAuth = true;
-        $mail->Username = $_ENV['SMTP_USER'];
-        $mail->Password = $_ENV['SMTP_PASS'];
+        $mail->Username = $_ENV['SMTP_USERNAME'];
+        $mail->Password = $_ENV['SMTP_PASSWORD'];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = $_ENV['SMTP_PORT'];
 
         // Configuración del correo
-        $mail->setFrom($_ENV['SMTP_FROM'], $_ENV['SMTP_FROM_NAME']);
+        $mail->setFrom($_ENV['SMTP_FROM_EMAIL'], $_ENV['SMTP_FROM_NAME']); // Cambiado de SMTP_FROM a SMTP_FROM_EMAIL
         $mail->addAddress($email, $nombre); // Correo del destinatario
         $mail->Subject = 'Confirmación de Inscripción';
         $mail->Body = "Hola $nombre,\n\nGracias por inscribirte en el curso '$curso'. Nos pondremos en contacto contigo pronto.\n\nSaludos,\nEscuela de Capacitación";
@@ -61,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscripción de Cursos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/inscripcion.css">
 </head>
 
 <body>
