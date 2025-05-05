@@ -4,23 +4,25 @@ CREATE DATABASE db_curso;
 -- Usar la base de datos
 USE db_curso;
 
--- Crear la tabla usuarios
-CREATE TABLE usuarios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    rol ENUM('admin', 'usuario') DEFAULT 'usuario',
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+-- Estructura de tabla para la tabla `usuarios`
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(50) NOT NULL UNIQUE,
+  `password` varchar(255) NOT NULL,
+  `rol` enum('admin','usuario') DEFAULT 'usuario',
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Crear la tabla cursos
-CREATE TABLE cursos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    descripcion TEXT NOT NULL,
-    fecha_inicio DATE NOT NULL,
-    fecha_fin DATE NOT NULL,
-    cupo INT NOT NULL,
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+-- Estructura de tabla para la tabla `cursos`
+CREATE TABLE `cursos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `docente` varchar(100) NOT NULL,
+  `horas` int(11) NOT NULL,
+  `horario` varchar(100) NOT NULL,
+  `dias` varchar(100) NOT NULL,
+  `objetivo` text NOT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

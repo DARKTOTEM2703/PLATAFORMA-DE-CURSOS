@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <main class="col-md-9 col-lg-10 py-1 border main-content">
                 <h2 class="mb-4 tittle">ALTA DE CURSOS</h2>
                 <hr class="custom-divider mb-4">
-                <a href="ver_cursos.php" class="btn btn-dark btn-regresar">
+                <a href="cursos.php" class="btn btn-dark btn-regresar">
                     << REGRESAR</a>
                         <form method="POST" action="agregar_cursos.php">
                             <div class="mb-3">
@@ -53,6 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <option value="10">10 horas</option>
                                     <option value="20">20 horas</option>
                                     <option value="30">30 horas</option>
+                                    <option value="40">40 horas</option>
+
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -71,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <textarea class="form-control" name="objetivo" placeholder="Objetivo del curso" rows="3"
                                     required></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-guardar">Guardar Curso</button>
+                            <button type="submit" class="btn btn-primary btn-guardar mb-3">Guardar Curso</button>
                         </form>
             </main>
         </div>

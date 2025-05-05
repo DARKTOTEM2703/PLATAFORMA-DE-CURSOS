@@ -21,7 +21,7 @@ require_once 'elements/db.php';
             <main class="col-md-9 col-lg-10 py-1 border main-content">
                 <h2 class="mb-4 tittle">VER CURSOS</h2>
                 <hr class="custom-divider mb-4">
-                <a href="agregar_cursos.php" class="btn btn-dark btn-regresar">
+                <a href="cursos.php" class="btn btn-dark btn-regresar">
                     << REGRESAR</a>
                         <table class="table table-bordered text-center">
                             <thead class="table-dark">
