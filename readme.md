@@ -2,7 +2,7 @@
 
 ## Descripción del Proyecto
 
-Este proyecto es una plataforma web diseñada para gestionar la inscripción, administración y pago de cursos de capacitación. Incluye un sistema de administración para gestionar cursos y usuarios, así como una interfaz para que los estudiantes puedan inscribirse y realizar pagos en línea mediante la integración con Stripe.
+Este proyecto es una plataforma web para gestionar la inscripción, administración y pago de cursos de capacitación. Incluye un sistema de administración para gestionar cursos y usuarios, además de una interfaz para que los estudiantes puedan inscribirse y realizar pagos en línea mediante Stripe.
 
 ---
 
@@ -10,27 +10,27 @@ Este proyecto es una plataforma web diseñada para gestionar la inscripción, ad
 
 ### Backend
 
-- **PHP**: Lenguaje principal para la lógica del servidor y la interacción con la base de datos.
-- **MySQL**: Base de datos relacional para almacenar información de usuarios, cursos e inscripciones.
-- **Composer**: Gestor de dependencias para PHP.
-  - **PHPMailer**: Para el envío de correos electrónicos.
-  - **vlucas/phpdotenv**: Para la gestión de variables de entorno.
-  - **stripe/stripe-php**: Para la integración con la pasarela de pagos Stripe.
+- **PHP**: Lógica del servidor y conexión con la base de datos.
+- **MySQL**: Base de datos relacional para usuarios, cursos e inscripciones.
+- **Composer**: Gestor de dependencias.
+  - **PHPMailer**: Envío de correos electrónicos.
+  - **vlucas/phpdotenv**: Gestión de variables de entorno.
+  - **stripe/stripe-php**: Integración con Stripe.
 
 ### Frontend
 
-- **HTML5**: Estructura de las páginas web.
-- **CSS3**: Estilización de la interfaz de usuario.
-  - **Bootstrap 5**: Framework CSS para diseño responsivo y componentes predefinidos.
-- **JavaScript**: Funcionalidades dinámicas en el cliente.
-  - **Fetch API**: Para la carga dinámica de datos.
-  - **jQuery**: Para manipulación del DOM y eventos.
+- **HTML5**: Estructura de las páginas.
+- **CSS3**: Estilización de la interfaz.
+  - **Bootstrap 5**: Framework CSS para diseño responsivo.
+- **JavaScript**: Funcionalidades dinámicas.
+  - **Fetch API**: Carga dinámica de datos.
+  - **jQuery**: Manipulación del DOM.
 
 ### Infraestructura
 
-- **XAMPP**: Servidor local para ejecutar Apache, PHP y MySQL.
-- **Stripe**: Pasarela de pagos para gestionar transacciones en línea.
-- **SMTP**: Protocolo para el envío de correos electrónicos.
+- **XAMPP**: Servidor local.
+- **Stripe**: Pasarela de pagos.
+- **SMTP**: Envío de correos electrónicos.
 
 ---
 
@@ -38,99 +38,77 @@ Este proyecto es una plataforma web diseñada para gestionar la inscripción, ad
 
 ```
 ├── admin/
-│ ├── agregar_cursos.php
-│ ├── agregar_usuarios.php
-│ ├── cursos.php
-│ ├── dashboard.php
-│ ├── eliminar_curso.php
-│ ├── eliminar_usuarios.php
-│
-├── generar_hash.php
-│ ├── login.php
-│ ├── usuarios.php
-│ ├── ver_cursos.php
-│ ├── ver_usuarios.php
-│ ├── api/
-│ │ └── webhook_pago.php
-│ ├── css/
-│ ├── db/
-│ ├── elements/
-│ ├── img/
-│ ├── js/
-│ └── references/
+│   ├── agregar_cursos.php
+│   ├── ver_cursos.php
+│   ├── usuarios.php
+│   ├── api/
+│   │   └── webhook_pago.php
 ├── landing/
-│ ├── cursos.php
-│ ├── index.php
-│ ├── inscripcion.php
-│ ├── send_email.php
-│ ├── success.php
-│ ├── components/
-│ ├── css/
-│ └── img/
+│   ├── index.php
+│   ├── inscripcion.php
+│   ├── send_email.php
+│   ├── success.php
 ├── logs/
 ├── vendor/
 ├── .env
-├── .gitignore
 ├── composer.json
-├── composer.lock
 └── readme.md
 ```
 
-### Descripción de Carpetas y Archivos Principales
+### Descripción de Carpetas y Archivos
 
 #### **`admin/`**
 
-- **`agregar_cursos.php`**: Permite a los administradores agregar nuevos cursos con detalles como nombre, docente, horario, días y precio.
-- **`ver_cursos.php`**: Muestra una lista de todos los cursos disponibles en la base de datos.
-- **`usuarios.php`**: Gestión de usuarios, incluyendo la creación y eliminación.
-- **`api/webhook_pago.php`**: Endpoint para manejar los eventos de Stripe, como la confirmación de pagos.
+- **`agregar_cursos.php`**: Agregar nuevos cursos.
+- **`ver_cursos.php`**: Lista de cursos.
+- **`usuarios.php`**: Gestión de usuarios.
+- **`api/webhook_pago.php`**: Manejo de eventos de Stripe.
 
 #### **`landing/`**
 
-- **`index.php`**: Página principal para los usuarios, con información sobre la escuela y un enlace para inscribirse.
-- **`inscripcion.php`**: Formulario de inscripción para los estudiantes, que incluye selección de curso y método de pago.
-- **`send_email.php`**: Lógica para enviar correos electrónicos de confirmación con enlaces de pago.
-- **`success.php`**: Página de confirmación que muestra el estado del pago después de completar una transacción.
+- **`index.php`**: Página principal.
+- **`inscripcion.php`**: Formulario de inscripción.
+- **`send_email.php`**: Envío de correos de confirmación.
+- **`success.php`**: Confirmación de pago.
 
 #### **`logs/`**
 
-- Almacena los registros de eventos importantes, como intentos de inicio de sesión y errores.
+- Registros de eventos importantes.
 
 #### **`vendor/`**
 
-- Contiene las dependencias instaladas mediante Composer.
+- Dependencias instaladas con Composer.
 
 #### **`.env`**
 
-- Archivo de configuración para almacenar variables sensibles como claves de Stripe y credenciales SMTP.
+- Variables sensibles como claves de Stripe y credenciales SMTP.
 
 ---
 
 ## Funcionalidades Principales
 
-### 1. **Gestión de Cursos**
+1. **Gestión de Cursos**
 
-- Los administradores pueden agregar, editar y eliminar cursos.
-- Los cursos incluyen detalles como nombre, docente, horario, días, objetivo y precio.
+   - Agregar, editar y eliminar cursos.
+   - Detalles: nombre, docente, horario, días, objetivo y precio.
 
-### 2. **Gestión de Usuarios**
+2. **Gestión de Usuarios**
 
-- Los administradores pueden crear y eliminar usuarios.
-- Los usuarios tienen roles (`admin` o `usuario`) para controlar el acceso.
+   - Crear y eliminar usuarios.
+   - Roles: `admin` o `usuario`.
 
-### 3. **Inscripción de Estudiantes**
+3. **Inscripción de Estudiantes**
 
-- Los estudiantes pueden inscribirse en cursos mediante un formulario.
-- Se envía un correo de confirmación con un enlace para realizar el pago.
+   - Formulario de inscripción.
+   - Correo de confirmación con enlace de pago.
 
-### 4. **Pagos en Línea**
+4. **Pagos en Línea**
 
-- Integración con Stripe para procesar pagos de manera segura.
-- Los pagos se validan mediante un webhook que actualiza el estado de la inscripción.
+   - Integración con Stripe.
+   - Validación de pagos mediante webhook.
 
-### 5. **Panel Administrativo**
-
-- Los administradores pueden ver estadísticas, gestionar cursos y usuarios desde un panel centralizado.
+5. **Panel Administrativo**
+   - Estadísticas y gestión centralizada.
 
 ---
 
@@ -140,46 +118,37 @@ Este proyecto es una plataforma web diseñada para gestionar la inscripción, ad
 
 - PHP 7.4 o superior.
 - Composer instalado.
-- Servidor local como XAMPP o WAMP.
+- Servidor local (XAMPP o WAMP).
 - Claves de Stripe y credenciales SMTP.
 
 ### Instalación
 
 1. Clona el repositorio:
+
    ```bash
    git clone https://github.com/DARKTOTEM2703/Subir-Tarea-3-.--Formulario-Cursos-JS
    ```
 
-### Configuración de dependencias
-
-2. Instala las dependencias con Composer:
+2. Instala las dependencias:
 
    ```bash
    cd Subir-Tarea-3-.--Formulario-Cursos-JS
    composer install
-   composer require phpmailer/phpmailer
-   composer require vlucas/phpdotenv
-   composer require stripe/stripe-php
    ```
 
-3. Crea un archivo `.env` en la raíz del proyecto y configura las variables de entorno necesarias.
-   ```
-   # Variables de entorno
-   STRIPE_SECRET_KEY=sk_test_51H5...# Tu clave secreta de Stripe
-   STRIPE_PUBLISHABLE_KEY=pk_test_51H5...# Tu clave pública de Stripe
+3. Configura el archivo `.env`:
+   ```env
+   STRIPE_SECRET_KEY=sk_test_...
+   STRIPE_PUBLISHABLE_KEY=pk_test_...
    SMTP_HOST=smtp.gmail.com
    SMTP_PORT=587
    SMTP_USERNAME=correo@gmail.com
    SMTP_PASSWORD=contraseña
    ```
-   Reemplaza `sk_test_51H5...` y `pk_test_51H5...` con tus claves de Stripe.
-   Reemplaza `correo@gmail.com` y `contraseña` con tus credenciales de correo electrónico.
 
 ---
 
-### Cambios realizados:
+**Desarrollador**: Jafeth Daniel Gamboa Baas.
 
-1. **Se añadieron los comandos de Composer necesarios para instalar dependencias específicas.**
-2. **Se incluyó una sección para explicar cómo instalar las dependencias del proyecto.**
-
-Con estos cambios, el archivo `README.md` ahora incluye toda la información técnica necesaria para configurar y ejecutar el proyecto correctamente.
+**Contacto**: [jafethgamboa27@gmail.com](mailto:jafethgamboa27@gmail.com)  
+**Repositorio**: [GitHub](https://github.com/DARKTOTEM2703/Subir-Tarea-3-.--Formulario-Cursos-JS)
