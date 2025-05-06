@@ -36,6 +36,7 @@ Este proyecto es una plataforma web diseñada para gestionar la inscripción, ad
 
 ## Estructura del Proyecto
 
+```
 ├── admin/
 │ ├── agregar_cursos.php
 │ ├── agregar_usuarios.php
@@ -73,6 +74,7 @@ Este proyecto es una plataforma web diseñada para gestionar la inscripción, ad
 ├── composer.json
 ├── composer.lock
 └── readme.md
+```
 
 ### Descripción de Carpetas y Archivos Principales
 
