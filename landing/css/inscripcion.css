@@ -1,0 +1,135 @@
+.bg-primary {
+  background-color: #1a2d5d !important;
+}
+
+.img-fluid {
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.footer-hero {
+  width: 100%;
+  min-height: 120px;
+  background: url("https://blog.adecco.com.mx/wp-content/uploads/2019/05/cursos-adecco-capacitacion-personal-1-1.png")
+    center center/cover no-repeat;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50%;
+  margin-right: -50%;
+  overflow: hidden;
+}
+
+.footer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(82, 97, 130, 0.9); /* Más opaco */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.footer-text {
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 1px;
+  z-index: 2;
+  position: relative;
+}
+
+/* Contenedor del formulario */
+form {
+  margin: auto; /* Centra el formulario */
+  margin-top: 20px; /* Espacio superior */
+  margin-bottom: 20px; /* Espacio inferior */
+  justify-content: center; /* Centra el formulario horizontalmente */
+  max-width: 70rem; /* Ancho máximo del formulario */
+  background-color: #ffffff; /* Fondo blanco */
+  border: 2px solid #800020; /* Borde color burdeos */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 20px; /* Espaciado interno */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+/* Título del formulario */
+h2 {
+  color: #800020; /* Color burdeos */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Etiquetas de los campos */
+label {
+  font-weight: bold;
+  color: #1a2d5d; /* Azul oscuro */
+}
+
+/* Campos de entrada */
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+  border: 1px solid #800020; /* Borde color burdeos */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 10px;
+  width: 100%;
+  font-size: 14px;
+  color: #333; /* Texto oscuro */
+}
+
+/* Botón de envío */
+button[type="submit"] {
+  background-color: #800020; /* Fondo burdeos */
+  color: white; /* Texto blanco */
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px; /* Bordes redondeados */
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 100%;
+}
+
+button[type="submit"]:hover {
+  background-color: #5a0015; /* Burdeos más oscuro */
+}
+
+/* Mensajes de éxito y error */
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .table th,
+  .table td {
+    font-size: 12px; /* Reduce el tamaño de la fuente */
+    padding: 8px; /* Reduce el relleno */
+  }
+
+  .table th {
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  }
+
+  .table td {
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  }
+}

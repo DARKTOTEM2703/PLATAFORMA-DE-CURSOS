@@ -61,56 +61,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscripción de Cursos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/inscripcion.css">
+    <link rel="stylesheet" href="css/inscripcion.css">
 </head>
 
 <body>
-    <div class="container my-5">
-        <h2 class="text-center mb-4">INSCRIPCIÓN DE CURSOS</h2>
-        <?php if (isset($success)): ?>
-            <div class="alert alert-success"><?= $success ?></div>
-        <?php elseif (isset($error)): ?>
-            <div class="alert alert-danger"><?= $error ?></div>
-        <?php endif; ?>
-        <form method="POST" action="">
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Escribe tu nombre</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Cual es tu email</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono</label>
-                <input type="text" class="form-control" id="telefono" name="telefono" required>
-            </div>
-            <div class="mb-3">
-                <label for="curso" class="form-label">Escoge tu curso</label>
-                <select class="form-select" id="curso" name="curso" required>
-                    <?php
-                    $stmt = $pdo->query("SELECT nombre FROM cursos");
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        echo "<option value='{$row['nombre']}'>{$row['nombre']}</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="pago" class="form-label">Forma de pago</label>
-                <select class="form-select" id="pago" name="pago" required>
-                    <option value="Tarjeta">Tarjeta</option>
-                    <option value="Transferencia">Transferencia</option>
-                    <option value="Efectivo">Efectivo</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="comentarios" class="form-label">Déjanos tus comentarios</label>
-                <textarea class="form-control" id="comentarios" name="comentarios" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
+    <?php include '../elements/header.php';
+    include './components/information.php'; ?>
+    <?php if (isset($success)): ?>
+        <div class="alert alert-success"><?= $success ?></div>
+    <?php elseif (isset($error)): ?>
+        <div class="alert alert-danger"><?= $error ?></div>
+    <?php endif; ?>
+    <form method="POST" action="">
+        <h2 class="text-center">Formulario de Inscripción</h2>
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Escribe tu nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Cual es tu email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="telefono" name="telefono" required>
+        </div>
+        <div class="mb-3">
+            <label for="curso" class="form-label">Escoge tu curso</label>
+            <select class="form-select" id="curso" name="curso" required>
+                <?php
+                $stmt = $pdo->query("SELECT nombre FROM cursos");
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    echo "<option value='{$row['nombre']}'>{$row['nombre']}</option>";
+                }
+                ?>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="pago" class="form-label">Forma de pago</label>
+            <select class="form-select" id="pago" name="pago" required>
+                <option value="Tarjeta">Tarjeta</option>
+                <option value="Transferencia">Transferencia</option>
+                <option value="Efectivo">Efectivo</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="comentarios" class="form-label">Déjanos tus comentarios</label>
+            <textarea class="form-control" id="comentarios" name="comentarios" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
     </div>
+    <?php include 'components/footer.php'; ?>
 </body>
 
 </html>
