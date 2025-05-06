@@ -1,15 +1,8 @@
 <!-- filepath: c:\xampp\htdocs\Subir-Tarea-3-.--Formulario-Cursos-JS\landing\incripcion.php -->
 <?php
 require_once '../admin/elements/db.php'; // Conexión a la base de datos
-require '../vendor/autoload.php'; // Cargar PHPMailer y Dotenv
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use Dotenv\Dotenv;
-
-// Cargar variables de entorno
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
+require '../vendor/autoload.php'; // Cargar Dotenv
+require 'send_email.php'; // Cambia la ruta si es necesario
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['nombre'];
@@ -24,33 +17,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("INSERT INTO inscripciones (nombre, email, telefono, curso, pago, comentarios) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->execute([$nombre, $email, $telefono, $curso, $pago, $comentarios]);
 
-        // Configurar PHPMailer
-        $mail = new PHPMailer(true);
+        // Enviar correo de confirmación
+        $resultadoCorreo = enviarCorreoConfirmacion($nombre, $email, $curso, $pago);
 
-        // Configuración del servidor SMTP
-        $mail->isSMTP();
-        $mail->Host = $_ENV['SMTP_HOST'];
-        $mail->SMTPAuth = true;
-        $mail->Username = $_ENV['SMTP_USERNAME'];
-        $mail->Password = $_ENV['SMTP_PASSWORD'];
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = $_ENV['SMTP_PORT'];
-
-        // Configuración del correo
-        $mail->setFrom($_ENV['SMTP_FROM_EMAIL'], $_ENV['SMTP_FROM_NAME']);
-        $mail->addAddress($email, $nombre);
-        $mail->Subject = 'Confirmación de Inscripción';
-        $mail->Body = "Hola $nombre,\n\nGracias por inscribirte en el curso '$curso'. Nos pondremos en contacto contigo pronto.\n\nSaludos,\nEscuela de Capacitación";
-
-        // Enviar correo
-        $mail->send();
-        $success = "Inscripción realizada con éxito. Se ha enviado un correo de confirmación.";
+        if ($resultadoCorreo === true) {
+            $success = "Inscripción realizada con éxito. Se ha enviado un correo de confirmación.";
+        } else {
+            $success = "Inscripción realizada con éxito, pero hubo un problema al enviar el correo: $resultadoCorreo";
+        }
 
         // Redirigir para evitar reenvío del formulario
         header("Location: inscripcion.php?success=" . urlencode($success));
         exit;
-    } catch (Exception $e) {
-        $error = "Error al enviar el correo: " . $mail->ErrorInfo;
     } catch (PDOException $e) {
         $error = "Error al realizar la inscripción: " . $e->getMessage();
     }

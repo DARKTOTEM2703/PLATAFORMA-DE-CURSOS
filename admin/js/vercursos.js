@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <td>${course.dias}</td>
                             <td>${course.objetivo}</td>
                             <td>
-                                <a href="formulario_inscripcion.php?curso_id=${course.id}" class="btn btn-dark">Inscribirse</a>
+                                <a href="../landing/inscripcion.php?curso_id=${course.id}" class="btn btn-dark">Inscribirse</a>
                             </td>
                         </tr>
                     `;
