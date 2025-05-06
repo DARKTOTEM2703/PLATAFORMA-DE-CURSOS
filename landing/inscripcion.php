@@ -37,14 +37,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->Port = $_ENV['SMTP_PORT'];
 
         // Configuración del correo
-        $mail->setFrom($_ENV['SMTP_FROM_EMAIL'], $_ENV['SMTP_FROM_NAME']); // Cambiado de SMTP_FROM a SMTP_FROM_EMAIL
-        $mail->addAddress($email, $nombre); // Correo del destinatario
+        $mail->setFrom($_ENV['SMTP_FROM_EMAIL'], $_ENV['SMTP_FROM_NAME']);
+        $mail->addAddress($email, $nombre);
         $mail->Subject = 'Confirmación de Inscripción';
         $mail->Body = "Hola $nombre,\n\nGracias por inscribirte en el curso '$curso'. Nos pondremos en contacto contigo pronto.\n\nSaludos,\nEscuela de Capacitación";
 
         // Enviar correo
         $mail->send();
         $success = "Inscripción realizada con éxito. Se ha enviado un correo de confirmación.";
+
+        // Redirigir para evitar reenvío del formulario
+        header("Location: inscripcion.php?success=" . urlencode($success));
+        exit;
     } catch (Exception $e) {
         $error = "Error al enviar el correo: " . $mail->ErrorInfo;
     } catch (PDOException $e) {
@@ -62,15 +66,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Inscripción de Cursos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/inscripcion.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
     <?php include '../elements/header.php';
     include './components/information.php'; ?>
-    <?php if (isset($success)): ?>
-        <div class="alert alert-success"><?= $success ?></div>
+    <?php if (isset($_GET['success'])): ?>
+        <div class="alert alert-success" id="success-alert"><?= htmlspecialchars($_GET['success']) ?></div>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                // Ocultar la alerta después de 3 segundos
+                setTimeout(() => {
+                    const alert = document.getElementById("success-alert");
+                    if (alert) {
+                        alert.style.display = "none";
+                    }
+                }, 3000); // 3000 ms = 3 segundos
+
+                // Redirigir después de 3.5 segundos
+                setTimeout(() => {
+                    window.location.href = "inscripcion.php"; // Cambia la ruta si es necesario
+                }, 3500); // 3500 ms = 3.5 segundos
+            });
+        </script>
     <?php elseif (isset($error)): ?>
-        <div class="alert alert-danger"><?= $error ?></div>
+        <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
     <form method="POST" action="">
         <h2 class="text-center">Formulario de Inscripción</h2>
