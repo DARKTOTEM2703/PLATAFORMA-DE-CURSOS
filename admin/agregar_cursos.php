@@ -9,12 +9,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $horario = $_POST['horario'];
     $dias = $_POST['dias'];
     $objetivo = $_POST['objetivo'];
+    $precio = $_POST['precio']; // Nuevo campo para el precio
 
-    $stmt = $pdo->prepare('INSERT INTO cursos (nombre, docente, horas, horario, dias, objetivo) VALUES (?, ?, ?, ?, ?, ?)');
-    $stmt->execute([$nombre, $docente, $horas, $horario, $dias, $objetivo]);
+    // Validar que el precio sea un número positivo
+    if ($precio <= 0) {
+        $error = "El precio debe ser mayor a 0.";
+    } else {
+        $stmt = $pdo->prepare('INSERT INTO cursos (nombre, docente, horas, horario, dias, objetivo, precio) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        $stmt->execute([$nombre, $docente, $horas, $horario, $dias, $objetivo, $precio]);
 
-    header('Location: ver_cursos.php');
-    exit();
+        header('Location: ver_cursos.php');
+        exit();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -54,7 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <option value="20">20 horas</option>
                                     <option value="30">30 horas</option>
                                     <option value="40">40 horas</option>
-
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -73,6 +78,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <textarea class="form-control" name="objetivo" placeholder="Objetivo del curso" rows="3"
                                     required></textarea>
                             </div>
+                            <div class="mb-3">
+                                <input type="number" class="form-control" name="precio"
+                                    placeholder="Precio del curso (USD)" step="0.01" required>
+                            </div>
+                            <?php if (isset($error)): ?>
+                                <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+                            <?php endif; ?>
                             <button type="submit" class="btn btn-primary btn-guardar mb-3">Guardar Curso</button>
                         </form>
             </main>

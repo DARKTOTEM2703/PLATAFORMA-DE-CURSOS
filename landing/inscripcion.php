@@ -1,7 +1,7 @@
 <!-- filepath: c:\xampp\htdocs\Subir-Tarea-3-.--Formulario-Cursos-JS\landing\incripcion.php -->
 <?php
 require_once '../admin/elements/db.php'; // Conexión a la base de datos
-require '../vendor/autoload.php'; // Cargar Dotenv
+include '../vendor/autoload.php'; // Cargar Dotenv
 require 'send_email.php'; // Cambia la ruta si es necesario
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -12,13 +12,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pago = $_POST['pago'];
     $comentarios = $_POST['comentarios'];
 
+    // Obtener el precio del curso seleccionado
+    $stmt = $pdo->prepare("SELECT precio FROM cursos WHERE nombre = ?");
+    $stmt->execute([$curso]);
+    $cursoData = $stmt->fetch(PDO::FETCH_ASSOC);
+    $precio = $cursoData['precio'];
+
     try {
         // Insertar datos en la base de datos
-        $stmt = $pdo->prepare("INSERT INTO inscripciones (nombre, email, telefono, curso, pago, comentarios) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$nombre, $email, $telefono, $curso, $pago, $comentarios]);
+        $stmt = $pdo->prepare("INSERT INTO inscripciones (nombre, email, telefono, curso, pago, comentarios, estado) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$nombre, $email, $telefono, $curso, $pago, $comentarios, 'pendiente']);
 
         // Enviar correo de confirmación
-        $resultadoCorreo = enviarCorreoConfirmacion($nombre, $email, $curso, $pago);
+        $resultadoCorreo = enviarCorreoConfirmacion($nombre, $email, $curso, $pago, $precio);
 
         if ($resultadoCorreo === true) {
             $success = "Inscripción realizada con éxito. Se ha enviado un correo de confirmación.";
@@ -87,14 +93,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class="mb-3">
             <label for="curso" class="form-label">Escoge tu curso</label>
-            <select class="form-select" id="curso" name="curso" required>
+            <select class="form-select" id="curso" name="curso" required onchange="actualizarPrecio()">
                 <?php
-                $stmt = $pdo->query("SELECT nombre FROM cursos");
+                $stmt = $pdo->query("SELECT nombre, precio FROM cursos");
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    echo "<option value='{$row['nombre']}'>{$row['nombre']}</option>";
+                    echo "<option value='{$row['nombre']}' data-precio='{$row['precio']}'>{$row['nombre']}</option>";
                 }
                 ?>
             </select>
+        </div>
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio del curso</label>
+            <input type="text" class="form-control" id="precio" name="precio" readonly>
         </div>
         <div class="mb-3">
             <label for="pago" class="form-label">Forma de pago</label>
@@ -111,6 +121,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
     </div>
+    <script>
+        function actualizarPrecio() {
+            const cursoSelect = document.getElementById('curso');
+            const precioInput = document.getElementById('precio');
+            const precio = cursoSelect.options[cursoSelect.selectedIndex].getAttribute('data-precio');
+            precioInput.value = `$${precio}`;
+        }
+
+        // Inicializar el precio al cargar la página
+        document.addEventListener('DOMContentLoaded', actualizarPrecio);
+    </script>
     <?php include 'components/footer.php'; ?>
 </body>
 
