@@ -147,3 +147,27 @@ Este proyecto es una plataforma web diseñada para gestionar la inscripción, ad
    ```bash
    git clone https://github.com/DARKTOTEM2703/Subir-Tarea-3-.--Formulario-Cursos-JS
    ```
+
+### configuarcion de dependencias
+
+2. Instala las
+   dependencias con Composer:
+   ```powerShell
+   cd Subir-Tarea-3-.--Formulario-Cursos-JS
+   composer install
+   composer require phpmailer/phpmailer
+   composer require vlucas/phpdotenv
+   composer require stripe/stripe-php
+   ```
+3. Crea un archivo `.env` en la raíz del proyecto y configura las variables de entorno necesarias.
+   ```
+   # Variables de entorno
+   STRIPE_SECRET_KEY=sk_test_51H5...# Tu clave secreta de Stripe
+   STRIPE_PUBLISHABLE_KEY=pk_test_51H5...# Tu clave pública de Stripe
+   SMTP_HOST=smtp.gmail.com
+   SMTP_PORT=587
+   SMTP_USERNAME=correo@gmail.com
+   SMTP_PASSWORD=contraseña
+   ```
+   Reemplaza `sk_test_51H5...` y `pk_test_51H5...` con tus claves de Stripe.
+   Reemplaza `correo@gmail.com` y `contraseña` con tus credenciales de correo electrónico.
