@@ -63,6 +63,8 @@ function generarEnlaceDePago($nombre, $email, $curso, $precio)
 {
     Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']); // Usar la clave secreta desde el archivo .env
 
+    global $pdo; // Asegúrate de tener acceso a la conexión PDO
+
     try {
         $session = Session::create([
             'payment_method_types' => ['card'],
@@ -81,6 +83,10 @@ function generarEnlaceDePago($nombre, $email, $curso, $precio)
             'success_url' => 'http://localhost/Subir-Tarea-3-.--Formulario-Cursos-JS/landing/success.php?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => 'http://localhost/cancel.php',
         ]);
+
+        // Guardar el session_id en la base de datos
+        $stmt = $pdo->prepare("UPDATE inscripciones SET session_id = ? WHERE email = ? AND curso = ?");
+        $stmt->execute([$session->id, $email, $curso]);
 
         return $session->url;
     } catch (Exception $e) {

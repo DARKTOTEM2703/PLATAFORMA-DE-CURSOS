@@ -14,7 +14,7 @@ Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
 
 // Lee el cuerpo de la solicitud
 $payload = @file_get_contents('php://input');
-$sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'] ?? null; // Verifica si la cabecera existe
+$sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'] ?? null;
 $endpoint_secret = $_ENV['STRIPE_WEBHOOK_SECRET'];
 
 if (!$sig_header) {
@@ -29,12 +29,12 @@ try {
     if ($event->type === 'checkout.session.completed') {
         $session = $event->data->object;
 
-        // Obtener el email del cliente desde la sesión
-        $email = $session->customer_email;
+        // Obtener el session_id de Stripe
+        $sessionId = $session->id;
 
-        // Actualizar el estado del usuario a "válido"
-        $stmt = $pdo->prepare("UPDATE inscripciones SET estado = 'válido' WHERE email = ?");
-        $stmt->execute([$email]);
+        // Actualizar el estado de la inscripción a "válido" usando el session_id
+        $stmt = $pdo->prepare("UPDATE inscripciones SET estado = 'válido' WHERE session_id = ?");
+        $stmt->execute([$sessionId]);
 
         http_response_code(200);
         echo json_encode(['status' => 'success']);
