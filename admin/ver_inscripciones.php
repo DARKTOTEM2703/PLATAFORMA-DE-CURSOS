@@ -9,7 +9,7 @@ require_once 'elements/db.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ver Usuarios</title>
+    <title>Ver Inscripciones</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/usuarios.css">
     <link rel="stylesheet" href="css/ver_usuarios.css">
@@ -21,7 +21,7 @@ require_once 'elements/db.php';
         <div class="row">
             <?php include 'elements/sidebar.php'; ?>
             <main class="col-md-9 col-lg-10 py-1 border main-content">
-                <h2 class="mb-4 tittle">VER USUARIOS</h2>
+                <h2 class="mb-4 tittle">VER INSCRIPCIONES</h2>
                 <hr class="custom-divider mb-4">
                 <a href="dashboard.php" class="btn btn-dark btn-regresar">
                     << REGRESAR</a>
@@ -30,23 +30,28 @@ require_once 'elements/db.php';
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Password</th>
-                                    <th>Rol</th>
-                                    <th>Fecha de Registro</th>
+                                    <th>Email</th>
+                                    <th>Teléfono</th>
+                                    <th>Curso</th>
+                                    <th>Pago</th>
+                                    <th>Estado</th>
+                                    <th>Fecha de Inscripción</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                // Cambiar la consulta para obtener datos de la tabla 'usuarios'
-                                $stmt = $pdo->query('SELECT id, usuario, password, rol, fecha_creacion FROM usuarios');
-                                while ($usuario = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                $stmt = $pdo->query('SELECT * FROM inscripciones');
+                                while ($inscripcion = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                     echo "<tr>
-                                        <td>{$usuario['id']}</td>
-                                        <td>{$usuario['usuario']}</td>
-                                        <td>{$usuario['password']}</td>
-                                        <td>{$usuario['rol']}</td>
-                                        <td>{$usuario['fecha_creacion']}</td>
-                                    </tr>";
+                                <td>{$inscripcion['id']}</td>
+                                <td>{$inscripcion['nombre']}</td>
+                                <td>{$inscripcion['email']}</td>
+                                <td>{$inscripcion['telefono']}</td>
+                                <td>{$inscripcion['curso']}</td>
+                                <td>{$inscripcion['pago']}</td>
+                                <td>{$inscripcion['estado']}</td>
+                                <td>{$inscripcion['fecha_inscripcion']}</td>
+                </tr>";
                                 }
                                 ?>
                             </tbody>

@@ -10,6 +10,9 @@
         <li class="nav-item">
             <a class="nav-link text-white" href="../admin/usuarios.php">>> Usuarios</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="../admin/ver_inscripciones.php">>> Inscripciones</a>
+        </li>
     </ul>
     <div class="text-center mt-4">
         <form action="elements/logout.php" method="post">
