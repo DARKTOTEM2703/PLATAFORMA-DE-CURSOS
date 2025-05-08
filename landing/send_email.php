@@ -37,17 +37,54 @@ function enviarCorreoConfirmacion($nombre, $email, $curso, $pago, $precio)
         $mail->addAddress($email, $nombre);
         $mail->Subject = 'Confirmación de Inscripción';
 
+        // Configuración adicional
+        $mail->CharSet = 'UTF-8'; // Configurar la codificación UTF-8
+
         // Formato del correo
         $mail->isHTML(true);
         $mail->Body = "
-            <div style='font-family: Arial, sans-serif; line-height: 1.5;'>
-                <h1 style='color: #4CAF50;'>¡Inscripción Pendiente!</h1>
-                <p>Hola, <strong>$nombre</strong>,</p>
-                <p>Gracias por inscribirte en el curso <strong>$curso</strong>.</p>
-                <p>Para completar tu inscripción, realiza el pago utilizando el siguiente enlace:</p>
-                <p><a href='$enlacePago' style='color: #4CAF50; font-weight: bold;'>Realizar Pago</a></p>
-                <p>Nos pondremos en contacto contigo una vez que el pago sea validado.</p>
-                <p style='color: #555;'>Saludos,<br>Equipo de Capacitación</p>
+            <div style='font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f4; padding: 20px;'>
+                <!-- Header -->
+                <div style='background-color: #0046ad; padding: 20px; text-align: center; color: #ffffff;'>
+                    <h1 style='margin: 0; font-size: 24px;'>¡Gracias por tu inscripción!</h1>
+                </div>
+
+                <!-- Body -->
+                <div style='background-color: #ffffff; padding: 20px; border-radius: 8px; margin-top: 20px;'>
+                    <p style='font-size: 18px; color: #333;'>
+                        Hola, <strong>$nombre</strong>,
+                    </p>
+                    <p style='font-size: 16px; color: #555;'>
+                        Hemos recibido tu solicitud de inscripción al curso <strong>$curso</strong>. A continuación, encontrarás los detalles de tu inscripción:
+                    </p>
+
+                    <!-- Detalles del curso -->
+                    <h3 style='color: #333; font-size: 18px; margin-bottom: 10px;'>Detalles del curso:</h3>
+                    <ul style='list-style: none; padding: 0; font-size: 16px; color: #555;'>
+                        <li><strong>Curso:</strong> $curso</li>
+                        <li><strong>Precio:</strong> $$precio USD</li>
+                        <li><strong>Estado:</strong> Pendiente de pago</li>
+                    </ul>
+
+                    <!-- Botón de pago -->
+                    <div style='text-align: center; margin: 30px 0;'>
+                        <a href='$enlacePago' style='display: inline-block; background-color: #0046ad; color: #ffffff; text-decoration: none; padding: 15px 30px; font-size: 18px; font-weight: bold; border-radius: 5px;'>
+                            Realizar Pago
+                        </a>
+                    </div>
+
+                    <p style='font-size: 16px; color: #555;'>
+                        Una vez que el pago sea validado, recibirás una confirmación por correo electrónico.
+                    </p>
+                </div>
+
+                <!-- Footer -->
+                <div style='text-align: center; padding: 10px; background-color: #f4f4f4; color: #777; font-size: 14px; margin-top: 20px;'>
+                    <p style='margin: 0;'>Si tienes alguna pregunta, no dudes en contactarnos.</p>
+                    <p style='margin: 0; font-size: 12px; color: #999;'>
+                        © 2025 Equipo de Capacitación. Todos los derechos reservados.
+                    </p>
+                </div>
             </div>
         ";
 
@@ -66,6 +103,7 @@ function generarEnlaceDePago($nombre, $email, $curso, $precio)
     global $pdo; // Asegúrate de tener acceso a la conexión PDO
 
     try {
+        // Crear una nueva sesión de Stripe
         $session = Session::create([
             'payment_method_types' => ['card'],
             'customer_email' => $email,
@@ -84,9 +122,19 @@ function generarEnlaceDePago($nombre, $email, $curso, $precio)
             'cancel_url' => 'http://localhost/cancel.php',
         ]);
 
+        // Verificar si ya existe un registro con el mismo session_id
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM inscripciones WHERE session_id = ?");
+        $stmt->execute([$session->id]);
+        $exists = $stmt->fetchColumn();
+
+        if ($exists > 0) {
+            throw new Exception("El session_id ya existe en la base de datos. Intenta nuevamente.");
+        }
+
         // Guardar el session_id en la base de datos
-        $stmt = $pdo->prepare("UPDATE inscripciones SET session_id = ? WHERE email = ? AND curso = ?");
-        $stmt->execute([$session->id, $email, $curso]);
+        $stmt = $pdo->prepare("INSERT INTO inscripciones (nombre, email, telefono, curso, session_id, estado) VALUES (?, ?, ?, ?, ?, ?)");
+        $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : null; // Define $telefono from POST or set to null
+        $stmt->execute([$nombre, $email, $telefono, $curso, $session->id, 'pendiente']);
 
         return $session->url;
     } catch (Exception $e) {

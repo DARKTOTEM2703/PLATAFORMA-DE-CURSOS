@@ -19,22 +19,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $precio = $cursoData['precio'];
 
     try {
-        // Insertar datos en la base de datos
-        $stmt = $pdo->prepare("INSERT INTO inscripciones (nombre, email, telefono, curso, pago, comentarios, estado) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$nombre, $email, $telefono, $curso, $pago, $comentarios, 'pendiente']);
+        // Verificar si ya existe una inscripción con los mismos datos
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM inscripciones WHERE nombre = ? AND email = ? AND telefono = ? AND curso = ?");
+        $stmt->execute([$nombre, $email, $telefono, $curso]);
+        $exists = $stmt->fetchColumn();
 
-        // Enviar correo de confirmación
-        $resultadoCorreo = enviarCorreoConfirmacion($nombre, $email, $curso, $pago, $precio);
-
-        if ($resultadoCorreo === true) {
-            $success = "Inscripción realizada con éxito. Se ha enviado un correo de confirmación.";
+        if ($exists > 0) {
+            $error = "Ya existe una inscripción con los mismos datos. Por favor, modifica alguno de los campos.";
         } else {
-            $success = "Inscripción realizada con éxito, pero hubo un problema al enviar el correo: $resultadoCorreo";
-        }
+            // Insertar datos en la base de datos
+            $stmt = $pdo->prepare("INSERT INTO inscripciones (nombre, email, telefono, curso, pago, comentarios, estado) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$nombre, $email, $telefono, $curso, $pago, $comentarios, 'pendiente']);
 
-        // Redirigir para evitar reenvío del formulario
-        header("Location: inscripcion.php?success=" . urlencode($success));
-        exit;
+            // Enviar correo de confirmación
+            $resultadoCorreo = enviarCorreoConfirmacion($nombre, $email, $curso, $pago, $precio);
+
+            if ($resultadoCorreo === true) {
+                $success = "Inscripción realizada con éxito. Se ha enviado un correo de confirmación.";
+            } else {
+                $success = "Inscripción realizada con éxito, pero hubo un problema al enviar el correo: $resultadoCorreo";
+            }
+
+            // Redirigir para evitar reenvío del formulario
+            header("Location: inscripcion.php?success=" . urlencode($success));
+            exit;
+        }
     } catch (PDOException $e) {
         $error = "Error al realizar la inscripción: " . $e->getMessage();
     }
